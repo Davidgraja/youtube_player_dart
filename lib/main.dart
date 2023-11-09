@@ -14,7 +14,7 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
 
-  final String videoUrl = 'https://www.youtube.com/watch?v=YfpV3al_Q3k';
+  final String videoUrl = 'https://www.youtube.com/watch?v=-f5PwE_Q8Fs';
 
   late YoutubePlayerController controller;
 
@@ -50,19 +50,23 @@ class _MainAppState extends State<MainApp> {
         useMaterial3: true
       ),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Youtube player example'),
-          elevation: 4,
-          shadowColor: Colors.black54,
-        ),
-        body: Center(
-          child: YoutubePlayer(
-            controller: controller,
-            // showVideoProgressIndicator: true,
-            
-          ),
-        ),
+      home: YoutubePlayerBuilder(
+        player: YoutubePlayer(controller: controller),
+        builder: (context, player){
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Youtube player example'),
+              elevation: 4,
+              shadowColor: Colors.black54,
+            ),
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: player,
+              )
+            ),
+          );
+        } 
       ),
     );
   }
